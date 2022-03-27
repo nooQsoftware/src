@@ -1,3 +1,4 @@
+<div><span class="app-bar"></span></div>
 <div><mat-toolbar color="primary"><span><h2>nooQ Golf Club Admin</h2></span><span class="club-name">{{ (club | async)?.club?.name }}</span></mat-toolbar></div>
 <div *ngIf="visible | async">
   <button mat-icon-button [matMenuTriggerFor]="clubs" [disabled]="club == null || !isAdmin" *ngIf="(admins | async)?.length > 1" aria-label="Admin menu">
