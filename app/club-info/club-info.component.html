@@ -1,0 +1,66 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+   
+<div *ngIf="(club | async) != null" class="wrapper">
+  <mat-nav-list>
+  <p><mat-list-item><a mat-line [routerLink]="['/club-info']" [disabled]="!isAdmin" routerLinkActive="dark"><mat-icon>info</mat-icon><span>Club Details</span></a></mat-list-item></p>
+  <p><a mat-list-item (click)="showBanking()" [disabled]="!isAdmin" routerLinkActive="router-link-active"><mat-icon>account_balance</mat-icon><span>Banking Details</span></a></p>
+  <p><a mat-list-item (click)="showAdmins()" [disabled]="!isAdmin" routerLinkActive="router-link-active"><mat-icon>admin_panel_settings</mat-icon><span>Admin Users</span></a></p>
+  <p><a mat-list-item (click)="showIntegration()" [disabled]="!isAdmin" routerLinkActive="router-link-active"><mat-icon>integration_instructions</mat-icon><span>Membership Integration</span></a></p>
+</mat-nav-list></div></mat-sidenav>
+<mat-sidenav-content>
+  <div>
+  <form [formGroup]="grp">
+    <div class="row">
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Name" />
+    </mat-form-field></div>
+    <mat-form-field>
+      <input matInput formControlName="address" placeholder="Address" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="town" placeholder="Town" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="postcode" placeholder="Postcode" />
+    </mat-form-field>
+    <div class="row">
+    <mat-form-field>
+      <input matInput formControlName="email" placeholder="Email" />
+    </mat-form-field></div>
+    <div class="row">
+      <mat-form-field>
+        <input
+          matInput
+          formControlName="max_members"
+          placeholder="Max Members"
+        />
+      </mat-form-field>
+      <mat-checkbox formControlName="waiting_list"
+        >Waiting list active</mat-checkbox
+      >
+    </div>
+    <mat-form-field>
+      <mat-select
+        placeholder="Year Start Month"
+        formControlName="year_start_month"
+      >
+        <mat-option *ngFor="let month of months; let i = index" [value]="i">{{
+          month
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="row">
+      <button
+        mat-raised-button
+        (click)="saveClub()"
+        [disabled]="grp.invalid"
+        color="primary"
+      >
+        Save Details
+      </button>
+          </div>
+  </form>
+</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

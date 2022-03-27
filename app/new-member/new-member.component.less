@@ -1,0 +1,83 @@
+:host {
+  form {
+    max-width: max-content;
+    margin: 5px;
+    .row {
+      margin-left: 0;
+      margin-right: 0;
+      mat-form-field {
+        margin-right: 10px;
+        &.fill {
+          flex-grow: 1;
+        }
+        &.short {
+          max-width: 125px;
+        }
+      }
+      :nth-last-child(1) {
+        margin-right: 0;
+        flex-grow: 1;
+      }
+    }
+  }
+  .pay-flow {
+    display: none;
+    &.active {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      .cent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .c2 {
+          .pay {
+            padding: 10px;
+            border: 1px black solid;
+            background-color: white;
+            height: 342px;
+            width: 314px;
+            .pay-element {
+              display: none;
+            }
+            .place-holder {
+              display: block;
+              // height: 290px;
+            }
+          }
+        }
+      }
+      &.ready {
+        .cent .c2 .pay {
+          .pay-element {
+            display: block;
+          }
+          .place-holder {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding-top: 40px;
+}
+
+.clubsettings {
+  font-family: "Lora", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: 28px;
+}
+
+

@@ -1,0 +1,215 @@
+<div class="center">
+  <div class="landing">
+    <ngx-file-drop
+      dropZoneLabel="Drop files here"
+      (onFileDrop)="dropped($event)"
+      (onFileOver)="fileOver($event)"
+      (onFileLeave)="fileLeave($event)"
+    >
+      <ng-template
+        ngx-file-drop-content-tmp
+        let-openFileSelector="openFileSelector"
+      >
+        Drag & Drop download bank statement extracted files here.
+      </ng-template>
+    </ngx-file-drop>
+    <div class="select-existing">
+      <div>Or...</div>
+      <mat-select
+        id="select-existing"
+        placeholder="Select Existing"
+        [value]="data?.id"
+        (selectionChange)="statementSelected($event)"
+      >
+        <mat-option
+          [title]="statementRange(st)"
+          [value]="st.id"
+          *ngFor="let st of incompletes | async"
+          >{{ st.filename }}</mat-option
+        >
+      </mat-select>
+    </div>
+  </div>
+  <div class="upload-table">
+    <table class="table" [ngClass]="{ posting: posting }">
+      <thead>
+        <tr>
+          <th>Confirmed</th>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Credit</th>
+          <th>Debit</th>
+          <th class="member-name">Match</th>
+          <th class="context-menu">
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="stmtMenu"
+              [matMenuTriggerData]="{
+                statement: data
+              }"
+            >
+              <mat-icon aria-hidden="false" aria-label="{2:label} icon"
+                >more_vert</mat-icon
+              >
+            </button>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="upload-name-style">
+        <tr
+          *ngFor="let item of (matches | async)?.data; let i = index"
+          [ngClass]="{ posted: item.posted, excluded: item.excluded }"
+        >
+          <td *ngIf="!item.excluded">
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              [checked]="lineConfirmed(item)"
+              [disabled]="item.posted"
+              (click)="setState(item, 'toggle')"
+            />
+          </td>
+          <td *ngIf="item.excluded">&nbsp;</td>
+          <td>{{ item.date | date: "dd/MM/yyyy" }}</td>
+          <td>{{ item.type }}</td>
+          <td [title]="item.reason || ''">{{ item.description }}</td>
+          <td>{{ item.credit | currency: "GBP" }}</td>
+          <td>{{ item.debit | currency: "GBP" }}</td>
+          <td
+            *ngIf="item.members?.length == 0 && !item.excluded"
+            class="unmatched member-name"
+            [ngClass]="{
+              confirmed: item.post
+            }"
+          >
+            <app-member-autocomplete
+              (memberSelected)="setMember(item, $event)"
+            ></app-member-autocomplete>
+          </td>
+          <td
+            *ngIf="item.members?.length == 1"
+            class="matched member-name"
+            [ngClass]="{
+              pnp: item.members[0].confidence == 100,
+              confirmed: item.post
+            }"
+          >
+            <a
+              [href]="
+                'https://clubv1.com/People/Directory/' +
+                item.member.person_id +
+                '/Details'
+              "
+              target="_clubv1"
+              >{{ item.members[0].entry.name }}</a
+            >
+          </td>
+          <td
+            class="member-name"
+            *ngIf="item.members?.length > 1"
+            [ngClass]="{ confirmed: item.post }"
+          >
+            <mat-select
+              [hidden]="item.post || item.posted"
+              [value]="item?.member?.id"
+              (selectionChange)="setSelected(item, $event)"
+              [panelClass]="{ 'member-picker': true }"
+            >
+              <mat-option
+                [value]="member.entry.id"
+                *ngFor="let member of item.members"
+              >
+                {{ member.entry.name }} - {{ member.entry.email }} ({{
+                  member.confidence
+                }}%)
+              </mat-option>
+            </mat-select>
+            <a
+              target="_clubv1"
+              [href]="
+                'https://clubv1.com/People/Directory/' +
+                item.member.person_id +
+                '/Details'
+              "
+              *ngIf="item.post || item.posted"
+              >{{ item?.member?.name }}</a
+            >
+          </td>
+          <td *ngIf="item.excluded">&nbsp;</td>
+          <td class="context-menu">
+            <button
+              *ngIf="!item.excluded"
+              mat-icon-button
+              [matMenuTriggerFor]="lineMenu"
+              [matMenuTriggerData]="{
+                item: item
+              }"
+            >
+              <mat-icon aria-hidden="false" aria-label="{2:label} icon"
+                >more_vert</mat-icon
+              >
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button
+    mat-raised-button
+    (debounced)="postSelection()"
+    [debounceEnd]="postingComplete"
+    *ngIf="anyToPost()"
+  >
+    Post marked entries to membership system
+  </button>
+</div>
+<mat-menu #lineMenu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button
+      mat-menu-item
+      (click)="setState(item, 'posted')"
+      [disabled]="item.posted"
+    >
+      Mark as already posted
+    </button>
+    <button
+      mat-menu-item
+      (click)="setState(item, 'clear')"
+      [disabled]="!item.posted"
+    >
+      Mark as not yet posted
+    </button>
+    <button mat-menu-item (click)="item.members = []" [disabled]="item.posted">
+      Choose alternate member
+    </button>
+  </ng-template>
+</mat-menu>
+<mat-menu #stmtMenu="matMenu">
+  <ng-template matMenuContent let-statement="statement">
+    <button mat-menu-item (click)="setState(null, 'posted')">
+      Mark all as already posted
+    </button>
+    <button mat-menu-item (click)="setState(null, 'clear')">
+      Mark all as not yet posted
+    </button>
+    <button mat-menu-item (click)="setState(null, 'post')">
+      Mark all for posting
+    </button>
+    <button
+      mat-menu-item
+      (click)="markComplete()"
+      title="removes statement from list of existing statements"
+    >
+      Mark statement as complete
+    </button>
+    <button
+      mat-menu-item
+      (click)="deleteStatementRecord()"
+      title="allows reprocessing of existing stattement"
+    >
+      Delete statement record
+    </button>
+  </ng-template>
+</mat-menu>

@@ -1,0 +1,37 @@
+:host {
+  .wrapper {
+    padding-left: 40px;
+    form {
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      .row {
+        display: flex;
+        flex-direction: row;
+        margin:initial;
+        padding: 30px;
+        justify-content: space-evenly;
+      }
+    }
+    .add-button {
+      color: black;
+      background-color: white;
+      &.active {
+        color: white;
+        background-color: black;
+      }
+    }
+  }
+}
+.mat-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    padding-top: 20px;
+     height: 100%;
+}
+.mat-sidenav-content {
+padding: 16px;
+}
+mat-form-field.mat-form-field {
+  font-size: 16px;
+}

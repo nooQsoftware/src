@@ -1,0 +1,316 @@
+<div id="booking" class="section">
+  <div class="section-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="booking-cta">
+            <h1 class="center-block clubsettings">Join our club today</h1>
+            <img src="/assets/images/haverfordwestmemcard150.png" class="center-block" />
+            <p class="center-block clubsettings">
+              No waiting list!<br />
+              Fill in your details and join instantly
+            </p>
+          </div>
+        </div>
+        <div class="col-md-7 col-md-offset-1">
+          <div class="booking-form">
+            <form [formGroup]="newMemberGroup" (ngSubmit)="join($event)">
+              <div class="form-group">
+                <div>
+                  <h2>New Member Application - {{(club | async).name}}</h2>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="form-label"> Title:</label>
+                    <select class="form-control" formControlName="title">
+                      <option value="" disabled>Select</option>
+                      <option *ngFor="let t of titles | async" [value]="t">
+                        {{ t }}
+                      </option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">First Name</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="firstname"
+                      formControlName="firstName"
+                      placeholder="First Name"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label class="form-label">Last Name</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="lastname"
+                      formControlName="lastName"
+                      placeholder="Last Name"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Date of Birth</label>
+                    <input
+                      class="form-control"
+                      name="dob"
+                      id="dob"
+                      type="date"
+                      formControlName="dob"
+                      required
+                      (ngModelChange)="setDob($event)"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label class="form-label">eMail</label>
+                    <input
+                      class="form-control"
+                      name="email"
+                      formControlName="email"
+                      type="text"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Gender</label>
+                    <select
+                      name=""
+                      id=""
+                      class="form-control"
+                      formControlName="gender"
+                    >
+                      <!-- <option value="">Unspecified</option> -->
+                      <option value="" disabled>Unspecified</option>
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input class="form-control" formControlName="phone" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label class="form-label">Address</label>
+                    <input
+                      class="form-control"
+                      name="address1"
+                      type="text"
+                      formControlName="address"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Town/City</label>
+                    <input
+                      class="form-control"
+                      name="address2"
+                      formControlName="town"
+                      type="text"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="form-label">Post Code</label>
+                    <input
+                      class="form-control"
+                      name="address2"
+                      type="text"
+                      formControlName="pcode"
+                      required
+                      (ngModelChange)="setPCode($event)"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Occupation</label>
+                    <input
+                      class="form-control"
+                      name="occupation"
+                      type="text"
+                      formControlName="occupation"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Proposer</label>
+                    <input
+                      class="form-control"
+                      name="proposer"
+                      type="text"
+                      formControlName="proposer"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Seconder</label>
+                    <input
+                      class="form-control"
+                      name="seconder"
+                      type="text"
+                      formControlName="seconder"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Previous Club</label>
+                    <input
+                      class="form-control"
+                      name="previousclub"
+                      type="text"
+                      formControlName="previous_club"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Home Club</label>
+                    <input
+                      class="form-control"
+                      name="homeclub"
+                      type="text"
+                      formControlName="home_club"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Current Handicap:</label>
+                    <input
+                      class="form-control"
+                      name="hcapcurrent"
+                      formControlName="currHC"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Lowest Handicap:</label>
+                    <input
+                      class="form-control"
+                      formControlName="lowestHC"
+                      name="hcaplowest"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">CDH ID</label>
+                    <input
+                      class="form-control"
+                      name="cdhid"
+                      type="text"
+                      formControlName="cdh_id"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">Membership Type</label>
+                    <select
+                      class="form-control"
+                      formControlName="membership"
+                      (ngModelChange)="membershipChange($event)"
+                    >
+                      <option value="" disabled>Please Select</option>
+                      <option
+                        *ngFor="let v of memberships | async"
+                        [value]="v.id"
+                      >
+                        {{ v.title }}
+                      </option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">Reason for joining:</label>
+                    <input
+                      class="form-control"
+                      name="joinreason"
+                      type="text"
+                      placeholder="Learn new sport/Social golfer/To play competitions"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <p>
+                  I agree to become a member and abide by the rules and policies
+                  of the Club.
+                </p>
+                <mat-checkbox class="form-checkbox">
+                  <label for="rules">
+                    <input
+                      type="checkbox"
+                      id="rules"
+                      name="rules"
+                      formControlName="rules"
+                    />
+                    <span></span>Agree
+                  </label>
+                </mat-checkbox>
+              </div>
+              <input type="hidden" name="form_submitted" value="1" />
+              <div class="form-btn">
+                <button
+                  type="submit"
+                  name="save"
+                  class="submit-btn"
+                  mat-raised-button
+                >
+                  Join Now
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

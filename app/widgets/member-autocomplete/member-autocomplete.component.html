@@ -1,0 +1,19 @@
+<mat-form-field>
+  <input
+    matInput
+    [formControl]="fc"
+    placeholder="Select Member"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete
+    role="combobox"
+    autoActiveFirstOption
+    #auto="matAutocomplete"
+    [displayWith]="memberDisplay"
+    (optionSelected)="selectComplete($event)"
+  >
+    <mat-option *ngFor="let item of memberList | async" [value]="item">
+      <span>{{ item.name }}</span>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

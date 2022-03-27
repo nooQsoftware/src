@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Membership Integration</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="grp">
+      <mat-form-field>
+        <mat-select placeholder="System Type" formControlName="source">
+          <mat-option value="none">None</mat-option>
+          <mat-option value="clubv1">Club V1</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="username" placeholder="Username" />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+        />
+        <mat-hint *ngIf="grp.value.password == 'existing'"
+          >Leave alone to retain existing password.</mat-hint
+        >
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="grp.invalid && grp.value.source != 'none'"
+      (click)="save()"
+    >
+      Update
+    </button>
+    <button mat-raised-button color="default" (click)="dialogRef.close()">
+      Cancel
+    </button>
+  </mat-card-actions>
+</mat-card>

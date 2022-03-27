@@ -1,0 +1,24 @@
+:host {
+  .layout {
+    display: flex;
+    flex-direction: row;
+    .table {
+      flex: 3 0 0;
+    }
+    .detail {
+      margin-left: 15px;
+      flex: 1 0 0;
+      .data-row {
+        margin-bottom: 7px;
+        display: flex;
+        flex-direction: row;
+        .label {
+          flex: 1 0 0;
+        }
+        .value {
+          flex: 4 0 0;
+        }
+      }
+    }
+  }
+}

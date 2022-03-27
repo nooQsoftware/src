@@ -1,0 +1,73 @@
+<div *ngFor="let memb of member | async" class="layout">
+  <div class="detail">
+    <h2>Thank you for applying to join {{ memb.club_info.name }}</h2>
+    <p>
+      Your membership application has been received and is now being vetted by
+      the {{ memb.club_info.name }} Membership Secretary.
+    </p>
+    <p>
+      You will shortly receive an email confirming the details that you have
+      supplied and a link allowing you to amend any that you feel are incorrect.
+      Once your application has been vetted you will receive a further email
+      providing payment options. This email will be from
+      {{ memb.club_info.email }} and will include the reference AP-{{
+        memb.shortcode
+      }}
+      as additional security. Your membership will be complete and active once a
+      payment arrangement is in place.
+    </p>
+    <h2>Your Membership Application Detail</h2>
+    <div class="data-row">
+      <div class="label">Name</div>
+      <div class="value">{{ memb.first_name }} {{ memb.last_name }}</div>
+    </div>
+    <div class="data-row">
+      <div class="label">Date of Birth</div>
+      <div class="value">{{ memb.dob | date: "dd/MM/yyyy" }}</div>
+    </div>
+    <div class="data-row">
+      <div class="label">Phone</div>
+      <div class="value">{{ memb.phone }}</div>
+    </div>
+    <div class="data-row">
+      <div class="label">Address</div>
+      <div class="value">{{ memb.address }}</div>
+    </div>
+    <div class="data-row">
+      <div class="label">Town</div>
+      <div class="value">{{ memb.town }}</div>
+    </div>
+    <div class="data-row">
+      <div class="label">Postcode</div>
+      <div class="value">{{ memb.postcode }}</div>
+    </div>
+    <div class="data-row" *ngIf="memb.occupation != null">
+      <div class="label">Occupation</div>
+      <div class="value">{{ memb.occupation }}</div>
+    </div>
+    <div class="data-row" *ngIf="memb.proposer != null">
+      <div class="label">Proposer</div>
+      <div class="value">{{ memb.proposer }}</div>
+    </div>
+    <div class="data-row" *ngIf="memb.seconder != null">
+      <div class="label">Seconder</div>
+      <div class="value">{{ memb.seconder }}</div>
+    </div>
+    <div class="data-row" *ngIf="memb.current_handicap != null">
+      <div class="label">Current Handicap</div>
+      <div class="value">{{ memb.current_handicap }}</div>
+    </div>
+    <div class="data-row" *ngIf="memb.lowest_handicap != null">
+      <div class="label">Lowest Handicap</div>
+      <div class="value">{{ memb.lowest_handicap }}</div>
+    </div>
+    <div class="data-row" *ngIf="memb.cdh_id != null">
+      <div class="label">CDH ID</div>
+      <div class="value">{{ memb.cdh_id }}</div>
+    </div>
+    <div class="data-row">
+      <div class="label">Status</div>
+      <div class="value">{{ memb.statusText }}</div>
+    </div>
+  </div>
+</div>

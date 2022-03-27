@@ -1,0 +1,15 @@
+<!-- <mat-form-field>
+  <input
+    matInput
+    placeholder="Select Member"
+    id="memberSelect"
+    [matAutocomplete]="auto"
+    [formControl]="memberSelect"
+  />
+  <mat-autocomplete role="combobox" autoActiveFirstOption #auto="matAutocomplete" [displayWith]="memberDisplay">
+    <mat-option *ngFor="let item of memberList | async" [value]="item">
+      <span>{{ item.name }}</span>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field> -->
+<app-arrangement-table></app-arrangement-table>

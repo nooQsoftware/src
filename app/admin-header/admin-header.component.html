@@ -1,0 +1,78 @@
+<div><mat-toolbar color="primary"><span><h2>nooQ Golf Club Admin</h2></span><span class="club-name">{{ (club | async)?.club?.name }}</span></mat-toolbar></div>
+<div *ngIf="visible | async">
+  <button mat-icon-button [matMenuTriggerFor]="clubs" [disabled]="club == null || !isAdmin" *ngIf="(admins | async)?.length > 1" aria-label="Admin menu">
+    <mat-icon>golf_course</mat-icon>
+  </button>
+  </div>
+  <div><button mat-icon-button class="add-button" (click)="addMode()" [disabled]="!isAdmin" [ngClass]="{ active: inAddMode }" *ngIf="isSuper | async" routerLinkActive="router-link-active"><mat-icon>add_business</mat-icon><span>Add new club...</span></button>
+  </div>
+  
+  <div>
+     <mat-toolbar>
+      <button
+      mat-menu-item
+      [routerLink]="['/banking']"
+      routerLinkActive="mat-accent"
+      [disabled]="club == null || !isAdmin"
+    >
+      <mat-icon>account_balance</mat-icon>
+      <span>Reconciliation</span>
+    </button>
+    <button
+      mat-menu-item
+      [routerLink]="['/arrangements']"
+      routerLinkActive="mat-accent"
+      [disabled]="!isAdmin"
+    >
+      <mat-icon>handshake</mat-icon>
+      <span>Arrangements</span>
+    </button>
+    <button
+      mat-menu-item
+      [routerLink]="['/exclusions']"
+      routerLinkActive="mat-accent"
+      [disabled]="!isAdmin"
+    >
+      <mat-icon>money_off</mat-icon>
+      <span>Billing Exclusions</span>
+    </button>
+    <button
+      mat-menu-item
+      [routerLink]="['/finance-report']"
+      routerLinkActive="mat-accent"
+      [disabled]="!isAdmin"
+    >
+      <mat-icon>savings</mat-icon>
+      <span>Finance Report</span>
+    </button>
+    <button
+      mat-menu-item
+      [routerLink]="['/pending-applicants']"
+      routerLinkActive="mat-accent"
+      [disabled]="!isAdmin"
+    >
+      <mat-icon>group</mat-icon>
+      <span>Waiting List</span>
+    </button>
+    <button mat-menu-item [routerLink]="['/club-info']" routerLinkActive="mat-accent"
+    [disabled]="!isAdmin">
+      <mat-icon>info</mat-icon>
+      <span>Club Details</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+     </mat-toolbar>
+
+
+  <mat-menu #clubs="matMenu">
+    <button
+      mat-menu-item
+      *ngFor="let admin of admins | async"
+      (click)="setAdminGrant(admin)"
+    >
+      {{ admin?.club?.name }}
+    </button>
+  </mat-menu>
+</div>

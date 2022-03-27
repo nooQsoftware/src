@@ -1,0 +1,175 @@
+<h2>New Member Application - {{ (club | async).name }}</h2>
+<form [formGroup]="newMemberGroup" *ngIf="newMemberGroup">
+  <div class="row">
+    <mat-form-field class="short">
+      <mat-label>Title</mat-label>
+      <mat-select placeholder="Title" formControlName="title" required>
+        <mat-option *ngFor="let t of titles | async" [value]="t">{{
+          t
+        }}</mat-option>
+      </mat-select>
+      <mat-error>{{ errMapper("title", "Title") }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="firstName"
+        placeholder="First Name"
+        required
+      />
+      <mat-error>{{ errMapper("firstName", "First Name") }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="lastName"
+        placeholder="Last Name"
+        required
+      />
+      <mat-error>{{ errMapper("lastName", "Last Name") }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="short">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="dob"
+        (ngModelChange)="setDob($event)"
+        required
+        placeholder="Date of Birth"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error>{{ errMapper("dob", "Date of Birth") }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="email" placeholder="eMail" required />
+      <mat-error>{{ errMapper("email", "eMail") }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="short">
+      <mat-label>Gender</mat-label>
+      <mat-select placeholder="Gender" formControlName="gender" required>
+        <mat-option value="M">Male</mat-option>
+        <mat-option value="F">Female</mat-option>
+      </mat-select>
+      <mat-error>{{ errMapper("gender", "Gender") }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="phone" placeholder="Phone" required />
+      <mat-error>{{ errMapper("phone", "Phone number") }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="fill">
+      <input
+        matInput
+        formControlName="address"
+        placeholder="Address"
+        required
+      />
+      <mat-error>{{ errMapper("address", "Address") }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="fill">
+      <input matInput formControlName="town" placeholder="Town/City" required />
+      <mat-error>{{ errMapper("town", "Town") }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="short">
+      <input
+        matInput
+        formControlName="pcode"
+        placeholder="Postcode"
+        required
+        (ngModelChange)="setPCode($event)"
+      />
+      <mat-error>{{ errMapper("pcode", "Postcode") }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field>
+      <input matInput formControlName="occupation" placeholder="Occupation" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="proposer" placeholder="Proposer" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="seconder" placeholder="Seconder" />
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="fill">
+      <input
+        matInput
+        formControlName="previous_club"
+        placeholder="Previous Club"
+      />
+    </mat-form-field>
+    <mat-form-field class="fill">
+      <input matInput formControlName="home_club" placeholder="Home Club" />
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field>
+      <input matInput formControlName="currHC" placeholder="Current Handicap" />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="lowestHC"
+        placeholder="Lowest Handicap"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="cdh_id" placeholder="CDH ID" />
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field>
+      <mat-label>Membership Type</mat-label>
+      <mat-select
+        placeholder="Membership Type"
+        formControlName="membership"
+        (ngModelChange)="membershipChange($event)"
+        required
+      >
+        <!-- <mat-option value="" disabled>Please Select</mat-option> -->
+        <mat-option *ngFor="let v of memberships | async" [value]="v.id">{{
+          v.title
+        }}</mat-option>
+      </mat-select>
+      <mat-error>{{ errMapper("membership", "Membership Type") }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="fill">
+      <mat-label>Reason for joining</mat-label>
+      <input
+        matInput
+        formControlName="reason"
+        placeholder="Learn new sport/Social golfer/To play competitions"
+      />
+    </mat-form-field>
+  </div>
+  <mat-checkbox formControlName="rules" required
+    >I agree to become a member and abide by the rules and policies of the
+    Club.</mat-checkbox
+  >
+  <mat-error *ngIf="terms && newMemberGroup.controls.rules.hasError('required')"
+    >You must accept the rules and policies</mat-error
+  >
+
+  <div class="row">
+    <div class="fill">&nbsp;</div>
+    <button
+      mat-raised-button
+      color="primary"
+      (debounced)="join($event)"
+      [debounceEnd]="joinComplete"
+    >
+      Join Now
+    </button>
+    <div class="fill">&nbsp;</div>
+  </div>
+</form>

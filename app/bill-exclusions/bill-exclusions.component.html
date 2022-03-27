@@ -1,0 +1,67 @@
+<div class="mat-elevation-z8">
+  <table
+    mat-table
+    class="full-width-table"
+    matSort
+    matSortActive="name"
+    matSortDirection="asc"
+    aria-label="Elements"
+  >
+    <!-- Id Column -->
+    <ng-container matColumnDef="rec_no">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Record Number</th>
+      <td mat-cell *matCellDef="let row">{{ row.rec_no }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.bill_member.name }}</td>
+    </ng-container>
+
+    <!-- Notes Column -->
+    <ng-container matColumnDef="notes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Notes</th>
+      <td mat-cell *matCellDef="let row">{{ row.notes }}</td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let row">{{ row.bill_member.email }}</td>
+    </ng-container>
+
+    <!-- Outstanding Column -->
+    <ng-container matColumnDef="outstanding">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Outstanding</th>
+      <td mat-cell *matCellDef="let row">{{ row.bill.outstanding }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="tools">
+      <th mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="add()">
+          <mat-icon title="Add exclusion">person_add</mat-icon>Add New Exclusion
+        </button>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="delete(row)" title="Delete exclusion for {{row.bill_member.name}}">
+          <mat-icon aria-hidden="false" aria-label="{2:label} icon"
+            >delete</mat-icon
+          >
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    #paginator
+    [length]="(dataSource?.data | async)?.length"
+    [pageIndex]="0"
+    [pageSize]="10"
+    [pageSizeOptions]="[10, 25, 50, 100, 250]"
+  >
+  </mat-paginator>
+</div>

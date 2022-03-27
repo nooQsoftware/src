@@ -1,0 +1,53 @@
+div.landing {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  ngx-file-drop {
+    width: 30%;
+  }
+  .select-existing {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+    mat-select {
+      width: 20em;
+    }
+  }
+}
+.matched {
+  color: primary;
+  &.pnp {
+    color: mat-teal;
+  }
+  &.confirmed {
+    color: mat-teal 300;
+  }
+}
+tr.posted {
+  td {
+    text-decoration: line-through;
+    text-decoration-style: wavy;
+  }
+}
+
+tr.excluded {
+  text-decoration: line-through;
+  color: lightgrey;
+}
+
+.member-name {
+  width: 30em;
+}
+
+table.posting {
+  opacity: 0.25;
+}
+
+table tr td,
+table tr th {
+  vertical-align: middle;
+  &.context-menu {
+    text-align: center;
+  }
+}

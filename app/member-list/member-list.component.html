@@ -1,0 +1,66 @@
+<div class="layout">
+  <div class="table">
+    <app-member-table (selectChanged)="showDetail($event)"></app-member-table>
+  </div>
+  <div class="detail">
+    <div *ngIf="memb != null">
+      <h2>Member Detail</h2>
+      <div class="data-row">
+        <div class="label">Name</div>
+        <div class="value">{{ memb.first_name }} {{ memb.last_name }}</div>
+      </div>
+      <div class="data-row">
+        <div class="label">Date of Birth</div>
+        <div class="value">{{ memb.dob | date }}</div>
+      </div>
+      <div class="data-row">
+        <div class="label">Phone</div>
+        <div class="value">{{ memb.phone }}</div>
+      </div>
+      <div class="data-row">
+        <div class="label">Address</div>
+        <div class="value">{{ memb.address }}</div>
+      </div>
+      <div class="data-row">
+        <div class="label">Town</div>
+        <div class="value">{{ memb.town }}</div>
+      </div>
+      <div class="data-row">
+        <div class="label">Postcode</div>
+        <div class="value">{{ memb.postcode }}</div>
+      </div>
+      <div class="data-row">
+        <div class="label">Phone</div>
+        <div class="value">{{ memb.phone }}</div>
+      </div>
+      <div class="data-row">
+        <div class="label">Occupation</div>
+        <div class="value">{{ memb.occupation }}</div>
+      </div>
+      <div class="data-row">
+        <div class="label">Proposer</div>
+        <div class="value">{{ memb.proposer }}</div>
+      </div>
+      <div class="data-row">
+        <div class="label">Seconder</div>
+        <div class="value">{{ memb.seconder }}</div>
+      </div>
+      <div class="data-row">
+        <div class="label">Current Handicap</div>
+        <div class="value">{{ memb.current_handicap }}</div>
+      </div>
+      <div class="data-row">
+        <div class="label">Lowest Handicap</div>
+        <div class="value">{{ memb.lowest_handicap }}</div>
+      </div>
+      <div class="data-row">
+        <div class="label">CDH ID</div>
+        <div class="value">{{ memb.cdh_id }}</div>
+      </div>
+      <div class="data-row">
+        <div class="label">Status</div>
+        <div class="value">{{ memb.statusText }}</div>
+      </div>
+    </div>
+  </div>
+</div>

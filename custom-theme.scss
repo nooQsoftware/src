@@ -1,0 +1,638 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$nooqGolf-primary: mat-palette($mat-teal, 700);
+$nooqGolf-darker: mat-palette($mat-teal, 900);
+$nooqGolf-light: mat-palette($mat-teal, 200);
+$nooqGolf-accent: mat-palette($mat-teal, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$nooqGolf-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$nooqGolf-theme: mat-light-theme($nooqGolf-primary, $nooqGolf-accent, $nooqGolf-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($nooqGolf-theme);
+
+.mat-h2, .mat-title, .mat-typography h2 {
+    margin: 0 0 16px;
+    padding-left: 16px;
+    padding-top: 16px;
+  }
+
+.mat-body p, .mat-body-1 p, .mat-typography p {
+    padding: 20px;
+}
+.mat-components {
+    box-sizing: border-box;
+    display: flex;
+    font-family: Roboto;
+    margin: 64px auto;
+    width: 1664px;
+  }
+  .mat-components__section {
+    display: flex;
+  }
+  .mat-components__column {
+    display: flex;
+    height: 664px;
+    flex-direction: column;
+    margin: 0 8px;
+    width: 400px;
+  }
+  .mat-components .flex {
+    flex: 1;
+    box-sizing: border-box;
+  }
+  .mat-components p {
+    color: #616161;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .mat-component > p {
+    color: #616161;
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 0;
+  }
+  .mat-component__section {
+    align-items: center;
+    background-color: #EEEEEE;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    width: 400px;
+  }
+  .mat-component__section--size-narrow {
+    height: 152px;
+  }
+  .mat-component__section__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 30px;
+  }
+  .mat-component__section__content__frame {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+  }
+  .mat-component__section--size-full {
+    height: 620px;
+  }
+  .mat-component__containers {
+    align-items: flex-start;
+    display: flex;
+    height: 292px;
+    flex-direction: row;
+  }
+  .mat-component__containers__primary__only p {
+    display: none;
+  }
+  .mat-component__containers__primary, .mat-component__containers__secondary {
+    display: flex;
+    align-items: center;
+  }
+  .mat-component__containers__primary > p, .mat-component__containers__secondary > p {
+    color: #616161;
+    font-size: 11px;
+    font-weight: bold;
+  }
+  .mat-component__containers__primary__only {
+    margin-top: 40px;
+  }
+  .mat-component__containers__secondary {
+    margin-left: 80px;
+  }
+  .mat-component__containers__primary, .mat-component__containers__secondary {
+    flex-direction: column;
+  }
+  .mat-component__containers__primary > p, .mat-component__containers__secondary > p {
+    margin: 25px 0 15px;
+  }
+  .mat-component__containers__primary > *[class^="mat-"]:not(:nth-child(2)), .mat-component__containers__secondary > *[class^="mat-"]:not(:nth-child(2)) {
+    margin-top: 40px;
+  }
+  .mat-component__containers[dir-horizontal] {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .mat-component__containers[dir-horizontal] .mat-component__containers__primary__only {
+    margin-top: 0;
+  }
+  .mat-component__containers[dir-horizontal] .mat-component__containers__secondary {
+    margin-left: 0;
+    margin-top: 12px;
+  }
+  .mat-component__containers[dir-horizontal] .mat-component__containers__primary, .mat-component__containers[dir-horizontal] .mat-component__containers__secondary {
+    flex-direction: row;
+  }
+  .mat-component__containers[dir-horizontal] .mat-component__containers__primary > p, .mat-component__containers[dir-horizontal] .mat-component__containers__secondary > p {
+    margin: 0 16px 0 0;
+    text-align: right;
+    width: 60px;
+  }
+  .mat-component__containers[dir-horizontal] .mat-component__containers__primary > *[class^="mat-"], .mat-component__containers[dir-horizontal] .mat-component__containers__secondary > *[class^="mat-"] {
+    margin-top: 0;
+    margin-right: 60px;
+  }
+  *, :after, :before {
+    box-sizing: inherit;
+  }
+  @media all and (max-width: 1712px) {
+    .mat-components {
+      margin: 32px auto;
+      width: 832px;
+    }
+    .mat-components__section {
+      flex-direction: column;
+    }
+    .mat-components__column {
+      margin-bottom: 64px;
+    }
+  }
+  @media all and (max-width: 880px) {
+    .mat-components {
+      flex-direction: column;
+      width: 416px;
+    }
+  }
+  
+      .mat-component__buttons .mat-component__containers__primary .mat-button,
+      .mat-component__buttons .mat-component__containers__primary .mat-fab {
+        background-color: #00796B;
+        color: #ffffff;
+      }
+  
+      .mat-component__buttons .mat-component__containers__primary .mat-button--plain,
+      .mat-component__buttons .mat-component__containers__primary .mat-fab--plain {
+        background-color: transparent;
+        color: #00796B;
+      }
+  
+      .mat-component__buttons .mat-component__containers__secondary .mat-button,
+      .mat-component__buttons .mat-component__containers__secondary .mat-fab {
+        background-color: transparent;
+        color: #00796B;
+      }
+  
+      .mat-component__buttons .mat-component__containers__secondary .mat-button--plain,
+      .mat-component__buttons .mat-component__containers__secondary .mat-fab--plain {
+        background-color: transparent;
+        color: #00796B;
+      }
+  
+      .mat-component__buttons .mat-component__containers__primary .mat-button--raised.mat-ripple-upgraded::before,
+      .mat-component__buttons .mat-component__containers__primary .mat-button--raised.mat-ripple-upgraded::after {
+        background-color: rgba(255, 255, 255, 0.06);
+      }
+  
+      .mat-component__buttons .mat-component__containers__primary .mat-button--plain.mat-ripple-upgraded::before,
+      .mat-component__buttons .mat-component__containers__primary .mat-button--plain.mat-ripple-upgraded::after {
+        background-color: rgba(0, 121, 107, 0.06);
+      }
+  
+      .mat-component__buttons .mat-component__containers__primary .mat-fab.mat-ripple-upgraded::after {
+        background-color: rgba(255, 255, 255, 0.16);
+      }
+  
+      .mat-component__buttons .mat-component__containers__primary .mat-fab--plain.mat-ripple-upgraded::after {
+        background-color: rgba(0, 121, 107, 0.16);
+      }
+  
+      .mat-component__buttons .mat-component__containers__secondary .mat-button--raised.mat-ripple-upgraded::before,
+      .mat-component__buttons .mat-component__containers__secondary .mat-button--raised.mat-ripple-upgraded::after {
+        background-color: rgba(0, 121, 107, 0.06);
+      }
+  
+      .mat-component__buttons .mat-component__containers__secondary .mat-button--plain.mat-ripple-upgraded::before,
+      .mat-component__buttons .mat-component__containers__secondary .mat-button--plain.mat-ripple-upgraded::after {
+        background-color: rgba(0, 121, 107, 0.16);
+      }
+  
+      .mat-component__buttons .mat-component__containers__secondary .mat-fab.mat-ripple-upgraded::after {
+        background-color: rgba(0, 121, 107, 0.16);
+      }
+  
+      .mat-component__buttons .mat-component__containers__secondary .mat-fab--plain.mat-ripple-upgraded::after {
+        background-color: rgba(0, 121, 107, 0.16);
+      }
+    
+    .mat-component__selection .mat-component__containers__primary__only .mat-snackbar {
+      transform: translate(-50%,-100%);
+    }
+  
+    .mat-component__selection .mat-snackbar {
+      left: auto !important;
+      transform: translate(-28%,-164%);
+      position: absolute;
+      min-width: 240px;
+      margin-left: -16px;
+      width: 240px;
+    }
+  
+    .mat-component__selection .mat-snackbar__secondary {
+      transform: translate(-28%,-40%);
+    }
+  
+    .mat-component__selection .mat-snackbar__text,
+    .mat-component__selection .mat-snackbar__action-button {
+      opacity: 1;
+      font-size: 12px;
+    }
+    
+      .mat-component__switches .mat-component__containers__primary .mat-checkbox__native-control:checked:not(:disabled) ~ .mat-checkbox__background,
+      .mat-component__switches .mat-component__containers__primary .mat-checkbox__native-control:indeterminate:not(:disabled) ~ .mat-checkbox__background,
+      .mat-component__switches .mat-component__containers__primary .mat-radio__native-control:checked+.mat-radio__background .mat-radio__inner-circle {
+        background-color: #00796B;
+        border-color: #00796B;
+      }
+  
+      .mat-component__switches .mat-component__containers__primary .mat-switch__native-control:checked~.mat-switch__background::before,
+      .mat-component__switches .mat-component__containers__primary .mat-switch__native-control:checked~.mat-switch__background .mat-switch__knob::before,
+      .mat-component__switches .mat-component__containers__primary .mat-switch__native-control:checked~.mat-switch__background .mat-switch__knob {
+        background-color: #00796B;
+      }
+  
+      .mat-component__switches .mat-component__containers__primary .mat-radio__native-control:checked+.mat-radio__background .mat-radio__outer-circle {
+        border-color: #00796B;
+      }
+  
+      .mat-component__switches .mat-component__containers__primary .mat-checkbox__background::before,
+      .mat-component__switches .mat-component__containers__primary .mat-radio__background::before {
+        background-color: #00796B;
+      }
+  
+      .mat-component__switches .mat-component__containers__secondary .mat-checkbox__native-control:checked:not(:disabled) ~ .mat-checkbox__background,
+      .mat-component__switches .mat-component__containers__secondary .mat-checkbox__native-control:indeterminate:not(:disabled) ~ .mat-checkbox__background,
+      .mat-component__switches .mat-component__containers__secondary .mat-radio__native-control:checked+.mat-radio__background .mat-radio__inner-circle {
+        background-color: #00796B;
+        border-color: #00796B;
+      }
+  
+      .mat-component__switches .mat-component__containers__secondary .mat-switch__native-control:checked~.mat-switch__background::before,
+      .mat-component__switches .mat-component__containers__secondary .mat-switch__native-control:checked~.mat-switch__background .mat-switch__knob::before,
+      .mat-component__switches .mat-component__containers__secondary .mat-switch__native-control:checked~.mat-switch__background .mat-switch__knob {
+        background-color: #00796B;
+      }
+  
+      .mat-component__switches .mat-component__containers__secondary .mat-radio__native-control:checked+.mat-radio__background .mat-radio__outer-circle {
+        border-color: #00796B;
+      }
+  
+      .mat-component__switches .mat-component__containers__secondary .mat-checkbox__background::before,
+      .mat-component__switches .mat-component__containers__secondary .mat-radio__background::before {
+        background-color: #00796B;
+      }
+  
+      .mat-component__switches .mat-component__containers__primary .mat-checkbox.mat-ripple-upgraded--unbounded::before,
+      .mat-component__switches .mat-component__containers__primary .mat-checkbox.mat-ripple-upgraded--unbounded::after,
+      .mat-component__switches .mat-component__containers__primary .mat-radio.mat-ripple-upgraded--unbounded::before,
+      .mat-component__switches .mat-component__containers__primary .mat-radio.mat-ripple-upgraded--unbounded::after {
+        background-color: rgba(0, 121, 107, 0.14);
+      }
+  
+      .mat-component__switches .mat-component__containers__secondary .mat-checkbox.mat-ripple-upgraded--unbounded::before,
+      .mat-component__switches .mat-component__containers__secondary .mat-checkbox.mat-ripple-upgraded--unbounded::after,
+      .mat-component__switches .mat-component__containers__secondary .mat-radio.mat-ripple-upgraded--unbounded::before,
+      .mat-component__switches .mat-component__containers__secondary .mat-radio.mat-ripple-upgraded--unbounded::after {
+        background-color: #00796B;
+      }
+    
+    .mat-component__cards .mat-card {
+      background-color: #ffffff;
+      height: 316px;
+      width: 262px;
+    }
+  
+    .mat-component__cards .mat-card__title,
+    .mat-component__cards .mat-card__subtitle {
+      font-size: 11px;
+      line-height: 17px;
+    }
+  
+    .mat-component__cards .mat-card__subtitle {
+      color: #707070;
+    }
+  
+    .mat-component__cards .mat-card__header {
+      align-items: center;
+      display: flex;
+      height: 40px;
+      padding: 0 16px 20px;
+    }
+  
+    .mat-component__cards .demo-card__avatar {
+      background: #bdbdbd;
+      height: 40px;
+      width: 40px;
+      margin-right: 12px;
+      border-radius: 50%;
+    }
+  
+    .mat-component__cards .mat-card__supporting-text {
+      font-size: 10px;
+    }
+  
+    .mat-component__cards .demo-card--with-avatar .mat-card__title,
+    .mat-component__cards .demo-card--with-avatar .mat-card__subtitle {
+      margin-left: 56px;
+    }
+  
+    .mat-component__cards .mat-card__actions {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 16px 16px 16px;
+    }
+  
+    .mat-component__cards .mat-card__media {
+      height: 140px;
+      overflow: hidden;
+      padding: 0
+    }
+  
+    .mat-component__cards .mat-card__media .material-image {
+      top: 64px;
+      position: relative;
+    }
+  
+    .mat-component__cards .mat--theme-primary {
+      background-color: #00796B;
+      color: #ffffff;
+    }
+  
+    .mat-component__cards .mat--theme-secondary {
+      background-color: #00796B;
+      color: #ffffff;
+    }
+  
+    .mat-component__cards .material-image .material-image__background {
+      fill: #004c40;
+    }
+  
+    .mat-component__cards .material-image .material-image--shape-circle,
+    .mat-component__cards .material-image .material-image--shape-triangle {
+      fill: #00796B;
+    }
+  
+    .mat-component__cards .material-image .material-image--shape-intersection {
+      fill: #004c40;
+    }
+  
+    .mat-component__cards .mat-button--raised.mat--theme-primary.mat-ripple-upgraded::after {
+      background-color: rgba(255, 255, 255, 0.06);
+    }
+  
+    .mat-component__cards .mat-button--raised.mat--theme-secondary.mat-ripple-upgraded::after {
+      background-color: rgba(255, 255, 255, 0.06);
+    }
+    
+    .mat-component__menu .mat-toolbar {
+      background-color: #00796B;
+      z-index: 1;
+    }
+  
+    .mat-component__menu .mat-toolbar {
+      height: 56px;
+      padding: 16px;
+    }
+  
+    .mat-component__menu .mat-permanent-drawer {
+      border-right: none;
+      left: 0;
+      position: absolute;
+      top: 0;
+      z-index: 3;
+    }
+  
+    .mat-component__menu .mat-backdrop {
+      background-color: rgba(0, 0, 0, .50);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+    }
+  
+    .mat-component__menu .nav-header {
+      height: 140px;
+      position: relative;
+      overflow: hidden;
+    }
+  
+    .mat-component__menu .nav-header .material-image {
+      position: relative;
+      top: -50px;
+    }
+  
+    .mat-component__menu .mat-permanent-drawer {
+      box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    }
+  
+    .mat-component__menu .mat-list-item {
+      font-weight: 400;
+    }
+  
+    .mat-component__menu .mat-list-item.mat-ripple-upgraded {
+      left: 0;
+    }
+  
+    .mat-component__menu .mat-list-item.mat-ripple-upgraded::before,
+    .mat-component__menu .mat-list-item.mat-ripple-upgraded::after {
+      background-color: rgba(0, 121, 107, 0.06);
+    }
+  
+    .mat-component__menu .mat-permanent-drawer .mat-permanent-drawer--selected::before,
+    .mat-component__menu .mat-permanent-drawer .mat-list-item:active::before {
+      background-color: #00796B;
+      opacity: .16;
+    }
+  
+    .mat-component__menu .mat-permanent-drawer--selected.mat-list-item .mat-list-item__start-detail,
+    .mat-component__menu .mat-permanent-drawer .mat-permanent-drawer--selected {
+      color: inherit;
+    }
+  
+    .mat-component__menu .material-image__background {
+      fill: #004c40;
+    }
+  
+    .mat-component__menu .material-image--shape-circle,
+    .mat-component__menu .material-image--shape-triangle {
+      fill: #00796B;
+    }
+  
+    .mat-component__menu .material-image--shape-intersection {
+      fill: #004c40;
+    }
+    
+    .mat-component__textfield .mat-component__containers {
+      margin-top: 0;
+    }
+  
+    .mat-component__textfield .mat-component__containers__secondary {
+      padding: 0;
+    }
+  
+    .mat-component__textfield .mat-component__containers p {
+      padding-bottom: 20px;
+    }
+  
+    .mat-component__textfield .mat-textfield {
+      margin-right: 14px !important;
+    }
+  
+    .mat-component__textfield .mat-textfield__input {
+      width: 264px;
+    }
+  
+    .mat-component__textfield .mat-textfield__label {
+      bottom: 12px;
+    }
+  
+    .mat-component__textfield .mat-textfield--theme-primary .mat-textfield__label {
+      color: #00796B;
+    }
+  
+    .mat-component__textfield .mat-textfield--theme-primary .mat-textfield:not(.mat-textfield--upgraded) .mat-textfield__input:focus {
+      border-color: #00796B;
+    }
+  
+    .mat-component__textfield .mat-textfield--theme-secondary .mat-textfield__label {
+      color: #00796B;
+    }
+  
+    .mat-component__textfield .mat-textfield--theme-secondary .mat-textfield:not(.mat-textfield--upgraded) .mat-textfield__input:focus {
+      border-color: #00796B;
+    }
+    
+    .mat-component__toolbar .app-bar {
+      background-color: #004c40;
+      display: block;
+      height: 20px;
+      width: 100%;
+    }
+  
+    .mat-component__toolbar .mat-toolbar {
+      height: 56px;
+      padding: 16px;
+      flex-direction: row;
+      align-items: center;
+    }
+  
+    .mat-component__toolbar .mat-toolbar__section {
+      align-items: center;
+    }
+  
+    .mat-component__toolbar .mat-toolbar__title {
+      padding-left: 8px;
+    }
+  
+    .mat-component__toolbar .material-icons {
+      color: #ffffff;
+    }
+  
+    .mat-component__toolbar .material-image {
+      position: relative;
+      top: -64px;
+    }
+  
+    .mat-component__toolbar main {
+      background-color: white;
+      height: calc(100% - 48px);
+    }
+  
+    .mat-component__toolbar .cover-image__frame {
+      display: block;
+      height: 220px;
+      position: relative;
+      width: 100%;
+    }
+  
+    .mat-component__toolbar .cover-image {
+      display: block;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+  
+    .mat-component__toolbar .mat-fab {
+      position: absolute;
+      bottom: -25px;
+      right: 28px;
+    }
+  
+    .mat-component__toolbar .content {
+      font-size: 13px;
+      line-height: 20px;
+      padding: 50px 35px;
+    }
+  
+    .mat-component__toolbar .mat-component__section__content__frame::before {
+      bottom: 0;
+      content: "";
+      background-image: url(//storage.googleapis.com/demos-in-spec/images/android-bottom.png);
+      background-repeat: no-repeat;
+      height: 48px;
+      position: absolute;
+      width: 100%;
+      z-index: 9999999;
+    }
+  
+    .mat-component__toolbar .mat--theme-primary {
+      background-color: #00796B;
+      color: #ffffff;
+    }
+  
+    .mat-component__toolbar .mat--theme-secondary {
+      background-color: #00796B;
+      color: #ffffff;
+    }
+  
+    .mat-component__toolbar .material-image .material-image__background {
+      fill: #d8d8d8;
+    }
+  
+    .mat-component__toolbar .material-image .material-image--shape-circle,
+    .mat-component__toolbar .material-image .material-image--shape-triangle {
+      fill: #9b9b9b;
+    }
+  
+    .mat-component__toolbar .material-image .material-image--shape-intersection {
+      fill: #ffffff;
+    }
+  
+    .mat-component__toolbar .mat-icon-toggle::before,
+    .mat-component__toolbar .mat-icon-toggle::after {
+      background-color: rgba(255, 255, 255, 0.06);
+    }
+  
+    .mat-component__toolbar .mat-fab.mat--theme-primary.mat-ripple-upgraded::after {
+      background-color: rgba(255, 255, 255, 0.16);
+    }
+  
+    .mat-component__toolbar .mat-fab.mat--theme-secondary.mat-ripple-upgraded::after {
+      background-color: rgba(255, 255, 255, 0.16);
+    }
+    

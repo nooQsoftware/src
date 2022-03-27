@@ -1,0 +1,106 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ mode | titlecase }} Arrangement</mat-card-title>
+    <mat-card-subtitle>{{ data?.name }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="grp">
+      <mat-form-field *ngIf="mode == 'insert'">
+        <input
+          matInput
+          formControlName="member"
+          placeholder="Search & Select Member Name"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete
+          role="combobox"
+          autoActiveFirstOption
+          #auto="matAutocomplete"
+          [displayWith]="memberDisplay"
+        >
+          <mat-option *ngFor="let item of memberList | async" [value]="item">
+            <span>{{ item.name }}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-checkbox formControlName="evenPayments" (change)="clearInitial()">Even Payments</mat-checkbox>
+      <mat-form-field>
+        <input
+          matInput
+          formControlName="initial"
+          placeholder="Initial Payment"
+          [readonly]="grp.controls.evenPayments.value == true"
+        />
+        <button
+          [hidden]="
+            grp.controls.initial.value == null ||
+            grp.controls.evenPayments.value == true
+          "
+          matSuffix
+          mat-icon-button
+          title="Clear initial payment. Intial payment will be determined by balance."
+          (click)="clearInitial()"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+        <mat-hint *ngIf="grp.controls.evenPayments.value == true"
+          >Cannot be used with Even Payments option.</mat-hint
+        >
+        <mat-hint
+          *ngIf="
+            grp.controls.evenPayments.value == false &&
+            grp.controls.initial.value == null
+          "
+          >Initial payment is determined by balance.</mat-hint
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          formControlName="installments"
+          placeholder="Fixed no. installments"
+        />
+        <button
+          [hidden]="grp.controls.installments.value == null"
+          matSuffix
+          mat-icon-button
+          title="Clear installments. Installments will be calculated by end date (Sept)."
+          (click)="clearInstallments()"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+        <mat-hint *ngIf="grp.controls.installments.value == null"
+          >Installments will be calculated by end date.</mat-hint
+        >
+        <mat-hint *ngIf="grp.controls.installments.value != null"
+          >Initial payment followed by
+          {{ grp.controls.installments.value }} installments will be collected.</mat-hint
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Start Month" formControlName="startMonth">
+          <mat-option>Default</mat-option>
+          <mat-option [value]="1">January</mat-option>
+          <mat-option [value]="2">February</mat-option>
+          <mat-option [value]="3">March</mat-option>
+          <mat-option [value]="4">April</mat-option>
+          <mat-option [value]="5">May</mat-option>
+          <mat-option [value]="6">June</mat-option>
+          <mat-option [value]="7">July</mat-option>
+          <mat-option [value]="8">August</mat-option>
+          <mat-option [value]="9">September</mat-option>
+          <mat-option [value]="10">October</mat-option>
+          <mat-option [value]="11">November</mat-option>
+          <mat-option [value]="12">December</mat-option>
+        </mat-select>
+        <mat-hint *ngIf="grp.controls.startMonth.value == null"
+          >Default start month or next available after setup.</mat-hint
+        >
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button [disabled]="grp.invalid" (click)="save()">Update</button>
+    <button mat-button (click)="close()">Cancel</button>
+  </mat-card-actions>
+</mat-card>

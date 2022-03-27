@@ -1,0 +1,250 @@
+<img
+  src="https://clubv1.blob.core.windows.net/clubcrests/7235772d-7f46-445f-884f-2b48630ef646_crest.png"
+  alt="WLGC Crest"
+/>
+<div class="confirmed" *ngIf="staticInfo?.mode == 'confirmed'">
+  <h2>WLGC Membership Payment Confirmed</h2>
+  <p>Thank you for completing payment of your membership subscription.</p>
+  <p>
+    For a printable receipt of payment, click
+    <a [href]="staticInfo.payment.receipt_url" target="_blank_">here</a>
+  </p>
+
+  <div *ngIf="staticInfo?.billable?.member?.schedule != null">
+    <h2>Payment Schedule</h2>
+    <p>
+      In order to complete your membership payments, the following payments will
+      be taken on the first banking day on or after the dates below:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <td>Description</td>
+          <td>Date</td>
+          <td class="cash">Amount</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of staticInfo?.billable?.member?.schedule?.payments"
+        >
+          <td class="part" *ngIf="item.label">{{ item.label }}</td>
+          <td class="part" *ngIf="item.cycle">Month {{ item.cycle }}</td>
+          <td class="part" *ngIf="item.label">paid</td>
+          <td class="part" *ngIf="item.cycle">{{ item.date | date }}</td>
+          <td class="cash" [ngClass]="{ complete: item.label != null }">
+            {{ item.amount | currency: "GBP" }}
+          </td>
+        </tr>
+        <tr>
+          <td><b>Total (incl. already paid)</b></td>
+          <td></td>
+          <td class="cash total">
+            {{
+              total(staticInfo?.billable?.member?.schedule?.payments)
+                | currency: "GBP"
+            }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div
+  class="cancelled"
+  *ngIf="staticInfo?.mode == 'cancelled' && staticInfo.bill_entry != null"
+>
+  <h2>WLGC Membership Payment Cancelled</h2>
+  <p>
+    You cancelled your payment for your
+    {{ staticInfo.bill_entry.category }} membership.
+  </p>
+  <p>
+    Membership subscriptions for season 2022 are due for renewal from the 1st
+    January 2022. Our records indicate that your membership and other costs for
+    this period amount to
+    <span class="cash">{{ outstanding | currency: "GBP" }}</span>
+  </p>
+  <p>This value is made up of:</p>
+  <table>
+    <thead>
+      <tr>
+        <td class="part">Item</td>
+        <td class="cash">Value</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="staticInfo.bill_entry">
+        <td class="part">Membership - {{ staticInfo.bill_entry.category }}</td>
+        <td class="cash">
+          {{ staticInfo.bill_entry.subscription | currency: "GBP" }}
+        </td>
+      </tr>
+      <tr *ngFor="let fee of staticInfo.bill_entry.fees_detailed.breakdown">
+        <td class="part">{{ fee.name }}</td>
+        <td class="cash">{{ fee.value | currency: "GBP" }}</td>
+      </tr>
+      <tr *ngIf="staticInfo.bill_entry.locker">
+        <td class="part">Locker</td>
+        <td class="cash">
+          {{ staticInfo.bill_entry.locker | currency: "GBP" }}
+        </td>
+      </tr>
+      <tr *ngIf="staticInfo.bill_entry.vat">
+        <td class="part">VAT</td>
+        <td class="cash">{{ staticInfo.bill_entry.vat | currency: "GBP" }}</td>
+      </tr>
+      <tr *ngIf="staticInfo.bill_entry.swipe_card">
+        <td class="part">Swipe Card</td>
+        <td class="cash">
+          {{ staticInfo.bill_entry.swipe_card | currency: "GBP" }}
+        </td>
+      </tr>
+      <tr *ngIf="staticInfo.bill_entry.already_paid">
+        <td class="part">Amounts paid</td>
+        <td class="cash">
+          ({{ staticInfo.bill_entry.already_paid | currency: "GBP" }})
+        </td>
+      </tr>
+      <tr *ngIf="staticInfo.bill_entry.brought_forward">
+        <td class="part">Amounts carried forward</td>
+        <td class="cash">
+          {{ staticInfo.bill_entry.brought_forward | currency: "GBP" }}
+        </td>
+      </tr>
+      <tr *ngIf="staticInfo.bill_entry.outstanding">
+        <td><b>Total</b></td>
+        <td class="cash total">
+          {{ staticInfo.bill_entry.outstanding | currency: "GBP" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    The club incurs considerable effort and cost to administer, monitor and
+    manage membership subscriptions. In order to make this simpler and cheaper
+    for both the club and members, we would prefer electronic payment via the
+    buttons below.
+  </p>
+
+  <div class="options">
+    <p>
+      <b
+        >Note: In order to retain continuous membership, subscriptions should
+        either be payed in full or a financial agreement be in place, with
+        deposit paid, by the 28th February 2022.</b
+      >
+    </p>
+
+    <p>
+      Option 1. Pay in full (via Direct Debit or Debit/Credit card). This is the
+      club's preferred option, particularly using Direct Debit, and the full
+      amount of
+      <span class="cash total">{{
+        staticInfo.bill_entry.outstanding | currency: "GBP"
+      }}</span>
+      will be taken when you complete the payment form.
+    </p>
+
+    <p>
+      <a
+        class="pay-link"
+        href="/api/payments/{{ staticInfo.club.id }}/redirect/{{
+          staticInfo.cust
+        }}"
+        >Click here to pay in full</a
+      >
+    </p>
+
+    <div *ngIf="staticInfo.bill_entry.schedule">
+      <p>
+        Option 2. Pay over a number of months (via Direct Debit or Debit/Credit
+        card).
+      </p>
+      <p>
+        This is the club's new interest free monthly payment option.
+        <span *ngIf="staticInfo.bill_entry.deposit"
+          >An initial payment of {{ deposit | currency: "GBP" }} will be taken
+          when the payment form is submitted and the remaining balance will be
+          divided into equal payments on the 1st of each subsequent month, with
+          the final payment being taken in September.</span
+        >
+        <span *ngIf="!staticInfo.bill_entry.deposit"
+          >Equal monthly payments will be taken, with the first being debited
+          immediately and subsequent payments debiting on the 1st of each month.
+          The final payment will be taken in September.</span
+        >
+      </p>
+
+      <div class="example">
+        Example schedule:
+        <table>
+          <thead>
+            <tr>
+              <td>Description</td>
+              <td>Date</td>
+              <td>Amount</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let part of staticInfo.bill_entry.schedule">
+              <td *ngIf="part.label" class="part">{{ part.label }}</td>
+              <td *ngIf="part.cycle" class="part">Month {{ part.cycle }}</td>
+              <td *ngIf="part.label" class="part">{{ part.date }}</td>
+              <td *ngIf="part.cycle" class="part">
+                {{ part.date | date: "dd/MM/yyyy" }}
+              </td>
+              <td class="cash">{{ part.amount | currency: "GBP" }}</td>
+            </tr>
+            <tr>
+              <td><b>Total</b></td>
+              <td></td>
+              <td class="cash total">{{ staticInfo.bill_entry.outstanding | currency: "GBP" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <a class="pay-link" href="{{ checkout2 }}">Click here to pay monthly</a>
+      </p>
+    </div>
+
+    <p>
+      Option
+      <span *ngIf="staticInfo.bill_entry.schedule">3</span>
+      <span *ngIf="!staticInfo.bill_entry.schedule">2</span>. For members with
+      existing Standing Order arrangements, please amend your payment reference
+      to your new unique account identifier:
+      <b
+        >PNP{{ staticInfo.bill_entry.rec_no }}-{{
+          staticInfo.bill_entry.member.id
+        }}</b
+      >
+    </p>
+    <div class="direct">
+      <p>
+        Members wishing to pay via bank Electronic Funds Transfer, please use
+        the following details:
+      </p>
+      <div>
+        <i>Payee: </i>
+        {{ staticInfo.club.banking.name || staticInfo.club.name }}
+      </div>
+      <div><i>Sort Code: </i> {{ staticInfo.club.banking.sort }}</div>
+      <div><i>Account Number: </i>{{ staticInfo.club.banking.account }}</div>
+      <div>
+        <i>Reference: </i>
+        <b
+          >PNP{{ staticInfo.bill_entry.rec_no }}-{{
+            staticInfo.bill_entry.member.id
+          }}</b
+        >
+      </div>
+      <p>
+        Members wishing to pay in person can also do so via cash, card or cheque
+        in full at the pro shop.
+      </p>
+    </div>
+  </div>
+</div>

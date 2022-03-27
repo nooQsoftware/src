@@ -1,0 +1,10 @@
+<p>
+  Include:
+  <mat-radio-group [formControl]="filterType">
+    <mat-radio-button value="historic">Past</mat-radio-button>
+    <mat-radio-button value="future">Pending</mat-radio-button>
+    <mat-radio-button value="all">All</mat-radio-button>
+  </mat-radio-group>
+  <button mat-raised-button color="primary" (click)="download()">Download</button>
+</p>
+<app-finance-report-table [data]="data"></app-finance-report-table>

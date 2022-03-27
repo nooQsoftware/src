@@ -1,0 +1,175 @@
+<div id="booking" class="section">
+  <div class="section-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="booking-cta">
+            <h1>Renew Your Membership</h1>
+            <img src="/assets/images/transparentcrest.png" class="center-block" />
+            <p>Update your latest contact details</p>
+          </div>
+        </div>
+        <div class="col-md-7 col-md-offset-1">
+          <div class="booking-form">
+            <form [formGroup]="existingMemberGroup" (ngSubmit)="rejoin($event)">
+              <div class="form-group">
+                <div>
+                  <h2>Existing Member Renewal</h2>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="form-label">Title</label>
+                    <select class="form-control" formControlName="title">
+                      <option value="" disabled>Select</option>
+                      <option *ngFor="let t of titles | async" [value]="t">
+                        {{ t }}
+                      </option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">First Name</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      formControlName="firstName"
+                      placeholder="First Name"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label class="form-label">Last Name</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      formControlName="lastName"
+                      placeholder="Last Name"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Date of Birth</label>
+                    <input
+                      class="form-control"
+                      formControlName="dob"
+                      type="date"
+                      required
+                      (ngModelChange)="setDob($event)"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label class="form-label">eMail</label>
+                    <input
+                      class="form-control"
+                      formControlName="email"
+                      type="text"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label class="form-label">Address</label>
+                    <input
+                      class="form-control"
+                      formControlName="address"
+                      type="text"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Town/City</label>
+                    <input
+                      class="form-control"
+                      formControlName="town"
+                      type="text"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="form-label">Post Code</label>
+                    <input
+                      class="form-control"
+                      formControlName="pcode"
+                      type="text"
+                      required
+                      (ngModelChange)="setPCode($event)"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">CDH ID</label>
+                    <input
+                      class="form-control"
+                      formControlName="cdhid"
+                      type="text"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">Membership Type</label>
+                    <select
+                      class="form-control"
+                      formControlName="membership"
+                      (ngModelChange)="membershipChange($event)"
+                    >
+                      <option value="" disabled>Please Select</option>
+                      <option
+                        *ngFor="let v of memberships | async"
+                        [value]="v.id"
+                      >
+                        {{ v.title }}
+                      </option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <p>
+                  I agree to become a member and abide by the rules and policies
+                  of the Club.
+                </p>
+                <div class="form-checkbox">
+                  <label for="rules">
+                    <input
+                      type="checkbox"
+                      id="rules"
+                      name="rules"
+                      formControlName="rules"
+                    />
+                    <span></span>Agree
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-btn">
+                <button class="submit-btn">Renew Now</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

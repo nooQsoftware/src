@@ -1,0 +1,38 @@
+<form [formGroup]="grp">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step formGroupName="basics">
+      <div class="vert">
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" />
+          <mat-error>{{errs(ctrl.firstName)}}</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="lastName" placeholder="Last Name" />
+        </mat-form-field>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step formGroupName="contact">
+      <div class="vert">
+        <mat-form-field>
+          <input matInput formControlName="address" placeholder="Address" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="town" placeholder="Town" />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="pcode"
+            name="postcode"
+            placeholder="Postcode"
+          />
+        </mat-form-field>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</form>
+<button (click)="checkErrors()">Errors</button>
